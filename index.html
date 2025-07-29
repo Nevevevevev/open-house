@@ -1,59 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sheet API Test</title>
+  <title>Insert via GET</title>
 </head>
 <body>
-  <h2>Insert Row</h2>
-  <input type="text" id="col1" placeholder="Column 1" />
-  <input type="text" id="col2" placeholder="Column 2" />
-  <button onclick="insertRow()">Insert</button>
+  <h2>Insert Row to Sheet</h2>
+  <input type="text" id="col1" placeholder="Column 1">
+  <input type="text" id="col2" placeholder="Column 2">
+  <button onclick="insertRow()">Send</button>
 
-  <h2>Search Row</h2>
-  <input type="number" id="searchIndex" placeholder="Column Index (0-based)" />
-  <input type="text" id="searchValue" placeholder="Match Value" />
-  <button onclick="selectRows()">Select</button>
-
-  <pre id="output"></pre>
+  <p id="response"></p>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwZBe4surx9_FnHbKn-efcNizeeD102DOgOVprjnrpeTKYbnm4W3qkIgEaCWDIvDxEL/exec"; // ← replace with your Apps Script URL
+    const API_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_ID/exec"; // Replace with your full URL
 
     function insertRow() {
-      const col1 = document.getElementById("col1").value;
-      const col2 = document.getElementById("col2").value;
+      const col1 = encodeURIComponent(document.getElementById("col1").value);
+      const col2 = encodeURIComponent(document.getElementById("col2").value);
+      const url = `${API_URL}?col1=${col1}&col2=${col2}`;
 
-      fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "insert",
-          row: [col1, col2]
+      fetch(url)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("response").innerText = data;
         })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("output").textContent = "Insert Result:\n" + JSON.stringify(data, null, 2);
-      });
-    }
-
-    function selectRows() {
-      const index = parseInt(document.getElementById("searchIndex").value, 10);
-      const value = document.getElementById("searchValue").value;
-
-      fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          action: "select",
-          columnIndex: index,
-          matchValue: value
-        })
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("output").textContent = "Select Result:\n" + JSON.stringify(data, null, 2);
-      });
+        .catch(error => {
+          document.getElementById("response").innerText = "Error: " + error;
+        });
     }
   </script>
 </body>
