@@ -3,6 +3,7 @@
 <head>
   <title>Insert via GET</title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     form {
       display: flex;
@@ -23,6 +24,12 @@
     }
     .radio-group label {
       margin-left: 8px;
+    }
+    @media (max-width: 600px) {
+      form {
+        width: 100%;
+        padding: 10px;
+      }
     }
   </style>
 </head>
