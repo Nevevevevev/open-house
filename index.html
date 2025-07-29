@@ -82,6 +82,7 @@
         .then(response => response.text())
         .then(data => {
           alert("Form submitted successfully");
+          location.reload();
         })
         .catch(error => {
           alert("There was an error: " + error);
