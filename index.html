@@ -11,6 +11,8 @@
       margin: 0 auto;
       border: 1px solid black;
       padding: 15px;
+      text-align: center;
+      align-items: center;
     }
     .radio-group div {
       display: flex;
@@ -26,7 +28,7 @@
 </head>
 <body>
   <center><h2>Everything with a * next to it is required</h2></center>
-  <form onsubmit="insertRow(); return false;">
+  <form onsubmit="">
     <input type="text" id="col1" placeholder="Name *" required>
     <input type="text" id="col2" placeholder="Address">
     <input type="number" id="col3" placeholder="Cell Number *" required>
@@ -35,35 +37,45 @@
     <p style="margin-bottom: 0;">Needs *</p>
     <div class="radio-group">
       <div><input value="Looking to buy now" type="radio" id="col5a" name="needs" required><label for="col5a">Looking to buy now</label></div>
-      <div><input vaue="Looking to buy within a year" type="radio" id="col5b" name="needs"><label for="col5b">Looking to buy within a year</label></div>
+      <div><input value="Looking to buy within a year" type="radio" id="col5b" name="needs"><label for="col5b">Looking to buy within a year</label></div>
       <div><input value="Looking to sell" type="radio" id="col5c" name="needs"><label for="col5c">Looking to sell</label></div>
       <div><input value="Just shopping around" type="radio" id="col5d" name="needs"><label for="col5d">Just shopping around</label></div>
     </div>
-
-    <label for="col6">Working with real estate agent: *</label>
-    <input type="checkbox" id="col6">
-
     <label for="col7">Pre-qualified for home loan: *</label>
     <input type="checkbox" id="col7">
 
+    <label for="col6">Working with real estate agent: *</label>
+    <input type="checkbox" id="col6">
+    <div id="ext"><input type="text" placeholder="Agent name *" id="an" ><input type="number" placeholder="Agent Cell Number *" id="ac" ></div>
     <input type="submit" value="Submit">
   </form>
 
   <p id="response"></p>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbyhXJ9rCabg26cJJ-M-AHj9CHOqTq_1SMpNMgM_SmtXF0Lwnz0XC0FYj-kNRH1rm1_8/exec";
-
-    function insertRow() {
+    const API_URL = "https://script.google.com/macros/s/AKfycbwJ2qJ6QBvN2sQaXMAm0ZPapF3mnEOcSJ_QeIwBZbEB_wFb57Kc07quFZ665HkdW0rP/exec";
+    $("#ext").hide();
+    $("#col6").change(function() {
+      if (this.checked) {
+        $("#ext").show();
+        $("#an").attr("required", true);
+        $("#ac").attr("required", true);
+      } else {
+        $("#ext").hide();
+        $("#an").removeAttr("required");
+        $("#ac").removeAttr("required");
+      }
+    });
+    function insertRow(event) {
+      event.preventDefault();
       const col1 = encodeURIComponent(document.getElementById("col1").value);
-      const col2 = encodeURIComponent(document.getElementById("col2").value);
+      const col2 = encodeURIComponent(document.getElementById("col2").value || "Prefer not to say");
       const col3 = encodeURIComponent(document.getElementById("col3").value);
       const col4 = encodeURIComponent(document.getElementById("col4").value);
       const col5 = encodeURIComponent($("input[name='needs']:checked").val());
       const col6 = document.getElementById("col6").checked ? "true" : "false";
       const col7 = document.getElementById("col7").checked ? "true" : "false";
-
-      const url = `${API_URL}?col1=${col1}&col2=${col2}&col3=${col3}&col4=${col4}&col5=${col5}&col6=${col6}&col7=${col7}`;
+      const url = `${API_URL}?col1=${col1}&col2=${col2}&col3=${col3}&col4=${col4}&col5=${col5}&col6=${col6}&col7=${col7}&an=${$("#an").val() || "none"}&ac=${$("#ac").val() || "none"}`;
 
       fetch(url)
         .then(response => response.text())
@@ -74,6 +86,7 @@
           alert("There was an error: " + error);
         });
     }
+    $("form").submit(insertRow);
   </script>
 </body>
 </html>
