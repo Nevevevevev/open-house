@@ -8,12 +8,13 @@
     form {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       width: 300px;
       margin: 0 auto;
       border: 1px solid blue;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
-      align-items: center;
+      align-items: stretch;
       background-color: #99ffff;
     }
     body {
@@ -48,6 +49,23 @@
         width: 95% !important;
         padding: 10px;
         height: 95% !important;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="number"],
+      input[type="tel"] {
+        font-size: 1.2em;
+        height: 2.5em;
+      }
+      label, h6, p {font-size: 1.2em;}
+      input[type="checkbox"],
+      input[type="radio"] {
+        transform: scale(1.5);
+        margin-right: 10px;
+      }
+      #sbtn {
+        font-size: 1.2em;
+        height: 3em;
       }
     }
   </style>
