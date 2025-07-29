@@ -34,10 +34,10 @@
 
     <p style="margin-bottom: 0;">Needs *</p>
     <div class="radio-group">
-      <div><input type="radio" id="col5a" name="needs" required><label for="col5a">Looking to buy now</label></div>
-      <div><input type="radio" id="col5b" name="needs"><label for="col5b">Looking to buy within a year</label></div>
-      <div><input type="radio" id="col5c" name="needs"><label for="col5c">Looking to sell</label></div>
-      <div><input type="radio" id="col5d" name="needs"><label for="col5d">Just shopping around</label></div>
+      <div><input value="Looking to buy now" type="radio" id="col5a" name="needs" required><label for="col5a">Looking to buy now</label></div>
+      <div><input vaue="Looking to buy within a year" type="radio" id="col5b" name="needs"><label for="col5b">Looking to buy within a year</label></div>
+      <div><input value="Looking to sell" type="radio" id="col5c" name="needs"><label for="col5c">Looking to sell</label></div>
+      <div><input value="Just shopping around" type="radio" id="col5d" name="needs"><label for="col5d">Just shopping around</label></div>
     </div>
 
     <label for="col6">Working with real estate agent: *</label>
@@ -59,7 +59,7 @@
       const col2 = encodeURIComponent(document.getElementById("col2").value);
       const col3 = encodeURIComponent(document.getElementById("col3").value);
       const col4 = encodeURIComponent(document.getElementById("col4").value);
-      const col5 = encodeURIComponent($(".rad:checked").val());
+      const col5 = encodeURIComponent($("input[name='needs']:checked").val());
       const col6 = document.getElementById("col6").checked ? "true" : "false";
       const col7 = document.getElementById("col7").checked ? "true" : "false";
 
@@ -74,7 +74,6 @@
           alert("There was an error: " + error);
         });
     }
-    $("form").submit(insertRow);
   </script>
 </body>
 </html>
