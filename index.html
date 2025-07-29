@@ -69,10 +69,6 @@
       }
       .radio-group {
         margin: auto;
-        margin-top: 0;
-      }
-      form > p {
-        margin-bottom: 5px;
       }
       #sbtn {
         font-size: 1.2em;
@@ -89,15 +85,13 @@
     <input type="text" id="col2" placeholder="Address">
     <input type="text" id="col3" placeholder="Cell Number *" required inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
     <input type="email" id="col4" placeholder="Email *" required>
-
-    <p style="margin-bottom: 0;">Needs *</p>
     <div class="radio-group">
       <div><input value="Looking to buy now" type="radio" id="col5a" name="needs" required><label for="col5a">Looking to buy now</label></div>
       <div><input value="Looking to buy within a year" type="radio" id="col5b" name="needs"><label for="col5b">Looking to buy within a year</label></div>
       <div><input value="Looking to sell" type="radio" id="col5c" name="needs"><label for="col5c">Looking to sell</label></div>
       <div><input value="Just shopping around" type="radio" id="col5d" name="needs"><label for="col5d">Just shopping around</label></div>
     </div>
-    <label for="col7">Pre-qualified for home loan: *</label>
+    <label for="col7">Pre-qualified for home loan:</label>
     <input type="checkbox" id="col7">
 
     <label for="col6">Working with real estate agent: *</label>
