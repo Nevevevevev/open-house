@@ -45,6 +45,12 @@
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
       color: white !important;
     }
+    #sbtn:disabled {
+      background-color: #cccccc;
+      color: #666666;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
     @media (max-width: 1200px) {
       form {
         width: 95% !important;
@@ -120,7 +126,7 @@
     function insertRow(event) {
       event.preventDefault();
       $("#sbtn").attr("disabled", true);
-      $("#sbtn").text("Submitting...");
+      $("#sbtn").val("Submitting...");
       const col1 = encodeURIComponent(document.getElementById("col1").value);
       const col2 = encodeURIComponent(document.getElementById("col2").value || "Prefer not to say");
       const col3 = encodeURIComponent(document.getElementById("col3").value);
