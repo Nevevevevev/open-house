@@ -119,6 +119,8 @@
     });
     function insertRow(event) {
       event.preventDefault();
+      $("#sbtn").attr("disabled", true);
+      $("#sbtn").text("Submitting...");
       const col1 = encodeURIComponent(document.getElementById("col1").value);
       const col2 = encodeURIComponent(document.getElementById("col2").value || "Prefer not to say");
       const col3 = encodeURIComponent(document.getElementById("col3").value);
